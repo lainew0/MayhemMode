@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Character : MonoBehaviour, IDamagable
 {
@@ -9,24 +10,36 @@ public class Character : MonoBehaviour, IDamagable
     public int exp;
     private int killCount;
 
+    public static Action<int> onHealthChanged;
 
-    public event OnHealthChanged onHealthChanged;
-    public event OnExpChanged onExpChanged; 
-    public event OnKillCountChanged onKillCountChanged;
-    public delegate void OnHealthChanged(int health);
-    public delegate void OnExpChanged(int exp);
-    public delegate void OnKillCountChanged(int killCount);
-
-    void Awake()
+    void Start()
     {
-        currentHealth = 3;
+        currentHealth = maxHealth;
+        onHealthChanged?.Invoke(currentHealth);
+    }
+
+    void Update()
+    {
+
+    }
+
+    void BaseAttack()
+    {
+        
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        onHealthChanged?.Invoke(currentHealth);
+
         if (currentHealth <= 0) Die();
     }
+
+    void GatherExp()
+    {
+        
+    }    
 
     public void Die()
     {

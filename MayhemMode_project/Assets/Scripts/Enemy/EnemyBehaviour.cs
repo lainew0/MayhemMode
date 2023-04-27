@@ -23,7 +23,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamagable
     void FixedUpdate()
     {
         Vector3 direction = (targetDestination.position - transform.position).normalized;
-        rb.velocity = direction * speed;
+        //rb.velocity = direction * speed;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -36,13 +36,13 @@ public class EnemyBehaviour : MonoBehaviour, IDamagable
 
     void Attack()
     {
-        targetCharacter.TakeDamage(damage);
+        //targetCharacter.TakeDamage(damage);
     }
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        if (health <= 0) Die();
+        //health -= damage;
+        //if (health <= 0) Die();
     }
 
     public void Die()
