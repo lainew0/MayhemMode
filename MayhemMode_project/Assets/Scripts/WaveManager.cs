@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class WaveManager : MonoBehaviour
 {
@@ -18,28 +17,24 @@ public class WaveManager : MonoBehaviour
     public Wave[] waves;
     private Wave currentWave;
     [SerializeField] private int waveNumber = 0;
-    private bool stopSendingWaves = false;
+    private float waveDuration;
+    public bool stopSendingWaves = false;
 
-    enum WaveState
-    {
-        First,
-        Second,
-        Third,
-        Fourth,
-    }
-
-    WaveState waveState = WaveState.First;
+    public static Action<string> onCurrentWaveChanged;
 
     void Awake()
     {
         currentWave = waves[waveNumber];
         
         currentTime = totalTime;
+
+        waveDuration = currentWave.WaveDuration;
         spawnTimer = currentWave.CooldownSpawn;
     }
 
     void Update()
     {
+        if (stopSendingWaves) return;
         // currentTime -= Time.deltaTime;
 
         HandleWaves();
@@ -54,15 +49,17 @@ public class WaveManager : MonoBehaviour
 
     void HandleWaves()
     {
-        currentWave.WaveDuration -= Time.deltaTime;
+        if (waveNumber >= waves.Length) stopSendingWaves = true;
 
-        if (currentWave.WaveDuration <= 0)
+        waveDuration -= Time.deltaTime;
+        if (waveDuration <= 0)
         {
             waveNumber++;
             currentWave = waves[waveNumber];
+            waveDuration = currentWave.WaveDuration;
         }
 
-        if (waveNumber + 1 < waves.Length) stopSendingWaves = true;
+        onCurrentWaveChanged?.Invoke(currentWave.waveName);
     }
 
     void SpawnWave()
@@ -70,59 +67,28 @@ public class WaveManager : MonoBehaviour
         Vector3 position = GenerateRandomPosition();
         position += player.transform.position;
 
-        GameObject newEnemy = Instantiate(currentWave.EnemiesInWave[0]);
+        int randomEnemyInWave = UnityEngine.Random.Range(0, currentWave.EnemiesInWave.Length);
+
+        GameObject newEnemy = Instantiate(currentWave.EnemiesInWave[randomEnemyInWave]);
         newEnemy.transform.position = position;
         newEnemy.GetComponent<EnemyBehaviour>().SetTarget(player);
         newEnemy.transform.parent = transform;
     }
 
-    /*
-    void HandleWavesState()
-    {
-        if (currentTime <= totalTime * 0.75)
-        {
-            waveState = WaveState.Second;
-        }
-        else if (currentTime <= totalTime * 0.5)
-        {
-            waveState = WaveState.Third;
-        }
-        else if (currentTime <= totalTime * 0.25)
-        {
-            waveState = WaveState.Fourth;
-        }
-
-        switch (waveState)
-        {
-            case WaveState.First:
-                
-            break;
-            case WaveState.Second:
-
-            break;
-            case WaveState.Third:
-
-            break;
-            case WaveState.Fourth:
-
-            break;
-        }
-    }
-    */
 
     private Vector3 GenerateRandomPosition()
     {
         Vector3 position = new Vector3();
 
-        float f = Random.value > 0.5f ? -1f : 1f;
+        float f = UnityEngine.Random.value > 0.5f ? -1f : 1f;
 
-        if (Random.value > 0.5f)
+        if (UnityEngine.Random.value > 0.5f)
         {
-            position.x = Random.Range(-spawnArea.x, spawnArea.x);
+            position.x = UnityEngine.Random.Range(-spawnArea.x, spawnArea.x);
             position.y = spawnArea.y * f;
         }
         else {
-            position.y = Random.Range(-spawnArea.y, spawnArea.y);
+            position.y = UnityEngine.Random.Range(-spawnArea.y, spawnArea.y);
             position.x = spawnArea.x * f;
         }
 

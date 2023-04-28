@@ -7,7 +7,7 @@ using System;
 public class Character : MonoBehaviour, IDamagable
 {
 #region Public_Variables
-    public int maxHealth = 3;
+    public int maxHealth = 50;
     public int currentHealth;
     public int exp = 0;
     
@@ -16,7 +16,7 @@ public class Character : MonoBehaviour, IDamagable
 #region Private_Variables
     private int killCount = 0;
     private float invinciblityTime = 1f;
-    
+
 #endregion
 
 

@@ -8,7 +8,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamagable
     [SerializeField] Enemy enemyConfiguration;
     Character targetCharacter;
     Transform targetDestination;
-    GameObject targetGameobject;
+    [SerializeField] GameObject targetGameobject;
     Rigidbody2D rb;
 
     public static Action onEnemyDied;
@@ -22,31 +22,33 @@ public class EnemyBehaviour : MonoBehaviour, IDamagable
     {
         targetGameobject = target;
         targetDestination = target.transform;
+        targetCharacter = target.GetComponent<Character>();
     }
 
     void FixedUpdate()
     {
         Vector3 direction = (targetDestination.position - transform.position).normalized;
-        //rb.velocity = direction * speed;
+        rb.velocity = direction * enemyConfiguration.speed;
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject == targetGameobject)
+        if (collision.gameObject.tag == "Player")
         {
+            Debug.Log("EPTA!");
             Attack();
         }
     }
 
     void Attack()
     {
-        //targetCharacter.TakeDamage(damage);
+        targetCharacter.TakeDamage(enemyConfiguration.damage);
     }
 
     public void TakeDamage(int damage)
     {
-        //health -= damage;
-        //if (health <= 0) Die();
+        enemyConfiguration.health -= damage;
+        if (enemyConfiguration.health <= 0) Die();
     }
 
     public void Die()
