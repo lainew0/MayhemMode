@@ -7,13 +7,19 @@ public class PlayerMovement : MonoBehaviour
     private float speed = 5f;
     private float limitedSpeed;
     private bool isFacingRight = true;
-    Rigidbody2D rb;
     float horizontal;
     float vertical;
+    Rigidbody2D rb;
+    Animator anim;
+    Quaternion localRotation;
+
     
     void Awake()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
+        localRotation = transform.localRotation;
     }
 
     void Update()
@@ -21,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 
-        FlipCharacter();
+        AnimateCharacter();
     }
 
     void FixedUpdate()
@@ -39,14 +45,33 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(horizontal * speed, vertical * speed);
     }
 
-    private void FlipCharacter()
+    private void AnimateCharacter()
     {
-        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
+        if (isFacingRight)
+            localRotation.y = 180;
+        else
+            localRotation.y = 0;
+
+
+        if (horizontal < 0f) 
         {
-            isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
+            anim.SetBool("isWalkingRight", false);
+            anim.SetBool("isWalkingLeft", true);
+            isFacingRight = false;
         }
+        else if (horizontal > 0f)
+        {
+            anim.SetBool("isWalkingLeft", false);
+            anim.SetBool("isWalkingRight", true);
+            isFacingRight = true;
+        }
+        else 
+        {
+            bool lastFacedDirection = isFacingRight;
+            anim.SetBool("isWalkingLeft", false);
+            anim.SetBool("isWalkingRight", false);
+        }
+
+        transform.localRotation = localRotation;
     }
 }

@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EnemyBehaviour : MonoBehaviour, IDamagable
 {
+    [SerializeField] Enemy enemyConfiguration;
     Character targetCharacter;
     Transform targetDestination;
     GameObject targetGameobject;
     Rigidbody2D rb;
+
+    public static Action onEnemyDied;
 
     void Awake()
     {
@@ -47,6 +51,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamagable
 
     public void Die()
     {
+        onEnemyDied?.Invoke();
         Destroy(gameObject);
     }
 }
