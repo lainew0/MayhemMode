@@ -15,10 +15,12 @@ public class PlayerMovement : MonoBehaviour
     Character character;
     public Vector2 moveDir;
     AnimationController animator;
+    SpriteRenderer sprite;
 
     
     void Awake()
     {
+        sprite = GetComponent<SpriteRenderer>();
         character = GetComponent<Character>();
         animator = GetComponent<AnimationController>();
         // anim = GetComponent<Animator>();
@@ -56,11 +58,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (horizontal < 0f) 
         {
-            transform.localScale = new Vector2(-0.1f, 0.1f);
+            sprite.flipX = true;
         }
         else if (horizontal > 0f)
         {
-            transform.localScale = new Vector2(0.1f, 0.1f);
+            sprite.flipX = false;
         }
 
         if (horizontal != 0 || vertical != 0)

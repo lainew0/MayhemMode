@@ -33,7 +33,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamagable
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject == targetGameobject)
         {
             Attack();
         }

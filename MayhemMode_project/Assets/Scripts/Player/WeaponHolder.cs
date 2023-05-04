@@ -4,50 +4,52 @@ using UnityEngine;
 
 public class WeaponHolder : MonoBehaviour
 {
-    public Weapon weapon;
+    public List<Weapon> weaponList;
     float cooldownTime;
     float activeTime;
-
-    enum WeaponState
-    {
-        ready,
-        cooldown,
-        active,
-    }
-    WeaponState state = WeaponState.cooldown;
-
+    public Transform weaponPoint;
 
     void Update()
     {
-        switch (state)
+        CalculatePosition();
+        foreach (Weapon weapon in weaponList)
         {
-            case WeaponState.ready:
-                if (Input.GetKey(KeyCode.Mouse0))
-                {
-                    weapon.Activate();
-                    state = WeaponState.active;
-                    activeTime = weapon.activeTime;
-                }
-            break;
-            case WeaponState.active:
-                if (activeTime > 0)
-                {
-                    activeTime -= Time.deltaTime;
-                } else
-                {
-                    state = WeaponState.cooldown;
-                    cooldownTime = weapon.cooldownTime;
-                }
-            break;
-            case WeaponState.cooldown:
-                if (cooldownTime > 0)
-                {
-                    cooldownTime -= Time.deltaTime;
-                } else
-                {
-                    state = WeaponState.ready;
-                }
-            break;
+            switch (weapon.state)
+            {
+                case WeaponState.ready:
+                        weapon.Activate(gameObject, weaponPoint);
+                        weapon.state = WeaponState.active;
+                        activeTime = weapon.activeTime;
+                break;
+                case WeaponState.active:
+                    if (activeTime > 0)
+                    {
+                        activeTime -= Time.deltaTime;
+                    } else
+                    {
+                        weapon.state = WeaponState.cooldown;
+                        cooldownTime = weapon.cooldownTime;
+                        weapon.DestroyObject();
+                    }
+                break;
+                case WeaponState.cooldown:
+                    if (cooldownTime > 0)
+                    {
+                        cooldownTime -= Time.deltaTime;
+                    } else
+                    {
+                        weapon.state = WeaponState.ready;
+                    }
+                break;
+            }
         }
+    }
+
+    void CalculatePosition()
+    {
+        Vector2 weaponPosition = transform.position;
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = mousePosition - weaponPosition;
+        transform.right = direction;
     }
 }

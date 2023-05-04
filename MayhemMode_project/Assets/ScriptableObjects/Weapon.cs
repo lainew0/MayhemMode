@@ -1,8 +1,16 @@
 using UnityEngine;
 
+public enum WeaponState
+{
+        ready,
+        cooldown,
+        active,
+}
+
 [CreateAssetMenu(fileName = "WeaponData", menuName = "ScriptableObjects/BaseWeapon")]
 public class Weapon : ScriptableObject
 {
+    public GameObject weaponPrefab;
     public string weaponName;
     public float cooldownTime;
     public float activeTime;
@@ -11,5 +19,9 @@ public class Weapon : ScriptableObject
     public float areaEffect;
     public float knockbackPower;
 
-    public virtual void Activate() {}
+    [HideInInspector]
+    public WeaponState state = WeaponState.cooldown;
+
+    public virtual void Activate(GameObject parent, Transform weaponPoint) {}
+    public virtual void DestroyObject() {}
 }
