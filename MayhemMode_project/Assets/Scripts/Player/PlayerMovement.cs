@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float speed = 5f;
+    private float speed;
     private float limitedSpeed;
     private bool isFacingRight = true;
     float horizontal;
@@ -12,10 +12,14 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     Animator anim;
     Quaternion localRotation;
+    Character character;
+    public Vector2 moveDir;
+    AnimationController animator;
 
     
     void Awake()
     {
+        character = GetComponent<Character>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -26,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
+        moveDir = new Vector2(horizontal, vertical);
 
         AnimateCharacter();
     }
@@ -36,7 +41,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void HandleMovement()
-    {
+    {  
+        speed = character.speed;
         limitedSpeed = speed - 1;
 
         if (horizontal != 0 && vertical != 0)

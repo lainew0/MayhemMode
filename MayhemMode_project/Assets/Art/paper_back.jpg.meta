@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9e377647036c1d94b886c14bf9c632fe
+guid: 7c8632f002aec9c4c8cc3124b841823c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 45
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ghost-shriek_0
+      name: paper_back_0
       rect:
         serializedVersion: 2
-        x: 20
-        y: 19
-        width: 24
-        height: 42
+        x: 536
+        y: 199
+        width: 45
+        height: 45
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,41 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3b863f74d58fcc4b93702588f121a57
-      internalID: -787090766
+      spriteID: d60f350e5cf5a5141b61165ba9793b5f
+      internalID: 1945914387
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ghost-shriek_1
+      name: paper_back_1
       rect:
         serializedVersion: 2
-        x: 79
-        y: 21
-        width: 31
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fc88170f9aee47c49b53dfde15301772
-      internalID: 1088968590
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ghost-shriek_2
-      rect:
-        serializedVersion: 2
-        x: 136
-        y: 23
+        x: 536
+        y: 199
         width: 46
-        height: 42
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,29 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ee7575ea3a30584d84be5b0cfe4b681
-      internalID: -1432334510
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ghost-shriek_3
-      rect:
-        serializedVersion: 2
-        x: 200
-        y: 23
-        width: 44
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fe47762ceceacac46bdc1f540e8a8011
-      internalID: 1032776915
+      spriteID: 9a2b859fbbc48724ca1dd21bcaa71917
+      internalID: -1334149218
       vertices: []
       indices: 
       edges: []
@@ -211,10 +169,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ghost-shriek_2: -1432334510
-      ghost-shriek_1: 1088968590
-      ghost-shriek_3: 1032776915
-      ghost-shriek_0: -787090766
+      paper_back_0: 1270320885
+      paper_back_1: 1945914387
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

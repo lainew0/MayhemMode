@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699817dd8613c15468e738601355b759, type: 3}
   m_Name: SecondWave
   m_EditorClassIdentifier: 
-  waveName: 
-  EnemiesInWave: []
-  WaveDuration: 0
-  LimitedNumberToSpawn: 0
-  CooldownSpawn: 0
+  waveName: SecondWave
+  EnemiesInWave:
+  - {fileID: 7929048044435577156, guid: e32986c0fcdfd9d4d81857b25824661f, type: 3}
+  - {fileID: 8794308195406327033, guid: 4b0f02fbd522020449520975b64d00ec, type: 3}
+  WaveDuration: 5
+  LimitedNumberToSpawn: 5
+  CooldownSpawn: 0.5

@@ -22,9 +22,12 @@ public class WeaponHolder : MonoBehaviour
         switch (state)
         {
             case WeaponState.ready:
-                weapon.Activate();
-                state = WeaponState.active;
-                activeTime = weapon.activeTime;
+                if (Input.GetKey(KeyCode.Mouse0))
+                {
+                    weapon.Activate();
+                    state = WeaponState.active;
+                    activeTime = weapon.activeTime;
+                }
             break;
             case WeaponState.active:
                 if (activeTime > 0)

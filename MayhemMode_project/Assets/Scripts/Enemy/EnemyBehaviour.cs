@@ -8,7 +8,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamagable
     [SerializeField] Enemy enemyConfiguration;
     Character targetCharacter;
     Transform targetDestination;
-    [SerializeField] GameObject targetGameobject;
+    GameObject targetGameobject;
     Rigidbody2D rb;
 
     public static Action onEnemyDied;
@@ -35,7 +35,6 @@ public class EnemyBehaviour : MonoBehaviour, IDamagable
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("EPTA!");
             Attack();
         }
     }

@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699817dd8613c15468e738601355b759, type: 3}
   m_Name: FirstWave
   m_EditorClassIdentifier: 
-  waveName: 
-  EnemiesInWave: []
-  WaveDuration: 0
-  LimitedNumberToSpawn: 0
-  CooldownSpawn: 0
+  waveName: CrockoWave
+  EnemiesInWave:
+  - {fileID: 8794308195406327033, guid: 4b0f02fbd522020449520975b64d00ec, type: 3}
+  WaveDuration: 10
+  LimitedNumberToSpawn: 10
+  CooldownSpawn: 2
