@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     float horizontal;
     float vertical;
     Rigidbody2D rb;
-    Animator anim;
+    // Animator anim;
     Quaternion localRotation;
     Character character;
     public Vector2 moveDir;
@@ -20,7 +20,8 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         character = GetComponent<Character>();
-        anim = GetComponent<Animator>();
+        animator = GetComponent<AnimationController>();
+        // anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
         localRotation = transform.localRotation;
@@ -53,31 +54,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void AnimateCharacter()
     {
-        if (isFacingRight)
-            localRotation.y = 180;
-        else
-            localRotation.y = 0;
-
-
         if (horizontal < 0f) 
         {
-            anim.SetBool("isWalkingRight", false);
-            anim.SetBool("isWalkingLeft", true);
-            isFacingRight = false;
+            transform.localScale = new Vector2(-0.1f, 0.1f);
         }
         else if (horizontal > 0f)
         {
-            anim.SetBool("isWalkingLeft", false);
-            anim.SetBool("isWalkingRight", true);
-            isFacingRight = true;
-        }
-        else 
-        {
-            bool lastFacedDirection = isFacingRight;
-            anim.SetBool("isWalkingLeft", false);
-            anim.SetBool("isWalkingRight", false);
+            transform.localScale = new Vector2(0.1f, 0.1f);
         }
 
-        transform.localRotation = localRotation;
+        if (horizontal != 0 || vertical != 0)
+        {
+            animator.ChangeAnimationState("Walk");
+        } 
+        else
+        {
+            animator.ChangeAnimationState("Idle");
+        }
     }
 }
