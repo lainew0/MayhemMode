@@ -19,6 +19,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private int waveNumber = 0;
     private float waveDuration;
     public bool stopSendingWaves = false;
+    [Header("Enemy Multipliers")]
+    public float speed_Multiplier = 1;
 
     public static Action<string> onCurrentWaveChanged;
 
@@ -70,6 +72,7 @@ public class WaveManager : MonoBehaviour
         int randomEnemyInWave = UnityEngine.Random.Range(0, currentWave.EnemiesInWave.Length);
 
         GameObject newEnemy = Instantiate(currentWave.EnemiesInWave[randomEnemyInWave]);
+        newEnemy.GetComponent<EnemyBehaviour>().speed *= speed_Multiplier;
         newEnemy.transform.position = position;
         newEnemy.GetComponent<EnemyBehaviour>().SetTarget(player);
         newEnemy.transform.parent = transform;

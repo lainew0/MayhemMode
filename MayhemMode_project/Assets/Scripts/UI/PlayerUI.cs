@@ -11,17 +11,17 @@ public class PlayerUI : MonoBehaviour
 
     void OnEnable()
     {
-        Character.onHealthChanged += ChangeHealthText;
-        Character.onKillCountChanged += ChangeKillCountText;
-        Character.onExpChanged += ChangeExpText;
+        ActionsManager.onHealthChanged += ChangeHealthText;
+        ActionsManager.onKillCountChanged += ChangeKillCountText;
+        ActionsManager.onExpChanged += ChangeExpText;
         WaveManager.onCurrentWaveChanged += ChangeWaveText;
     }
 
     void OnDisable()
     {
-        Character.onHealthChanged -= ChangeHealthText;
-        Character.onKillCountChanged -= ChangeKillCountText;
-        Character.onExpChanged -= ChangeExpText;
+        ActionsManager.onHealthChanged -= ChangeHealthText;
+        ActionsManager.onKillCountChanged -= ChangeKillCountText;
+        ActionsManager.onExpChanged -= ChangeExpText;
         WaveManager.onCurrentWaveChanged -= ChangeWaveText;
     }
 

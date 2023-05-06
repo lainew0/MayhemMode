@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement()
     {  
-        speed = character.speed;
+        speed = character.speed * character.multiplier.speed;
         limitedSpeed = speed - 1;
 
         if (horizontal != 0 && vertical != 0)

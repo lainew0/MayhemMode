@@ -6,6 +6,8 @@ using System;
 
 public class Character : MonoBehaviour, IDamagable
 {
+    public Multiplier multiplier;
+
 #region Public_Variables
     public int maxHealth = 50;
     public float speed = 5f;
@@ -20,21 +22,13 @@ public class Character : MonoBehaviour, IDamagable
 
 #endregion
 
-
-#region Actions/Events
-    public static Action<int> onHealthChanged;
-    public static Action<int> onExpChanged;
-    public static Action<int> onKillCountChanged;
-
-#endregion
-
-
     void Start()
     {
+        maxHealth = Mathf.RoundToInt(maxHealth * multiplier.health);
         currentHealth = maxHealth;
-        onHealthChanged?.Invoke(currentHealth);
+        ActionsManager.onHealthChanged?.Invoke(currentHealth);
 
-        EnemyBehaviour.onEnemyDied += Kill;
+        ActionsManager.onEnemyDied += Kill;
     }
 
     void Update()
@@ -50,26 +44,21 @@ public class Character : MonoBehaviour, IDamagable
     void Kill()
     {
         killCount++;
-    }
-
-    void HandleKnockback(GameObject obj)
-    {
-        RaycastHit hit;
-        
+        ActionsManager.onKillCountChanged?.Invoke(killCount);
     }
 
     public void TakeDamage(int damage)
     {
         // Добавить Raycast для кнокбэка ближайших врагов
         currentHealth -= damage;
-        onHealthChanged?.Invoke(currentHealth);
+        ActionsManager.onHealthChanged?.Invoke(currentHealth);
 
         if (currentHealth <= 0) Die();
     }
 
     void GatherExp()
     {
-        onExpChanged?.Invoke(exp);
+        ActionsManager.onExpChanged?.Invoke(exp);
     }    
 
     public void Die()

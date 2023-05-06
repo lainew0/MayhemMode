@@ -11,10 +11,16 @@ public class EnemyBehaviour : MonoBehaviour, IDamagable
     GameObject targetGameobject;
     Rigidbody2D rb;
 
-    public static Action onEnemyDied;
+    // Changable vars
+    public int health;
+    public float speed;
+
 
     void Awake()
     {
+        health = enemyConfiguration.health;
+        speed = enemyConfiguration.speed;
+
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -28,12 +34,16 @@ public class EnemyBehaviour : MonoBehaviour, IDamagable
     void FixedUpdate()
     {
         Vector3 direction = (targetDestination.position - transform.position).normalized;
-        rb.velocity = direction * enemyConfiguration.speed;
+        //rb.velocity = direction * enemyConfiguration.speed;
+
+        rb.velocity = direction * speed;
     }
 
-    void OnCollisionStay2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D collider)
     {
-        if (collision.gameObject == targetGameobject)
+        //if (collider.gameObject.tag == "Weapon") return;
+
+        if (collider.gameObject == targetGameobject)
         {
             Attack();
         }
@@ -46,13 +56,13 @@ public class EnemyBehaviour : MonoBehaviour, IDamagable
 
     public void TakeDamage(int damage)
     {
-        enemyConfiguration.health -= damage;
-        if (enemyConfiguration.health <= 0) Die();
+        health -= damage;
+        if (health <= 0) Die();
     }
 
     public void Die()
     {
-        onEnemyDied?.Invoke();
+        ActionsManager.onEnemyDied?.Invoke();
         Destroy(gameObject);
     }
 }
