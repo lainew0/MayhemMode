@@ -371,9 +371,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05094857e829eef448a22535345437cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponList:
-  - {fileID: 11400000, guid: ccb2e12c580a5d243a7b75c785443f56, type: 2}
-  weaponPoint: {fileID: 374805444}
 --- !u!1 &374805443
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,6 +828,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3fba5ae726d24b84190a91bc88b80fa4, type: 2}
   waveNumber: 0
   stopSendingWaves: 0
+  speed_Multiplier: 1
 --- !u!4 &1005087784
 Transform:
   m_ObjectHideFlags: 0
@@ -1328,8 +1326,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad859f7d5a8186d46a40652bf17553a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multiplier: {fileID: 11400000, guid: 2572a6ddc38714d49b8bb307c18635b0, type: 2}
   maxHealth: 50
-  speed: 10
+  speed: 5
   currentHealth: 0
   exp: 0
 --- !u!114 &1789048997
@@ -1453,7 +1452,7 @@ Transform:
   m_GameObject: {fileID: 1789048993}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 346885842}

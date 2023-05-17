@@ -9,16 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6508fa00ca76ad4488df41c5b85de280, type: 3}
-  m_Name: SecondWhipAttack
+  m_Script: {fileID: 11500000, guid: 5b1e13d2f44c9f946898bfb1f11777f0, type: 3}
+  m_Name: RangeWeapon
   m_EditorClassIdentifier: 
-  weaponName: SecondWhip
+  weaponName: 
   stats:
-    _cooldownTime: 2
-    activeTime: 0
-    damage: 500
-    range: 1
+    abilityCooldown: 0
+    damage: 0
+    duration: 0
+    range: 0
     areaEffect: 0
     knockbackPower: 0
-  weaponPrefab: {fileID: 5274651061509956834, guid: 869a4b87884fbc14aa4db7d9fcafdf45, type: 3}
-  obj: {fileID: 0}
+  canUseAbility: 1
+  weaponPrefab: {fileID: 0}
+  speed: 0

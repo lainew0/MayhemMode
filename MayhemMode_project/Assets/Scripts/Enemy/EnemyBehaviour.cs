@@ -11,9 +11,8 @@ public class EnemyBehaviour : MonoBehaviour, IDamagable
     GameObject targetGameobject;
     Rigidbody2D rb;
 
-    // Changable vars
-    public int health;
-    public float speed;
+    [HideInInspector] public int health;
+    [HideInInspector] public float speed;
 
 
     void Awake()
@@ -34,15 +33,11 @@ public class EnemyBehaviour : MonoBehaviour, IDamagable
     void FixedUpdate()
     {
         Vector3 direction = (targetDestination.position - transform.position).normalized;
-        //rb.velocity = direction * enemyConfiguration.speed;
-
         rb.velocity = direction * speed;
     }
 
     void OnCollisionStay2D(Collision2D collider)
     {
-        //if (collider.gameObject.tag == "Weapon") return;
-
         if (collider.gameObject == targetGameobject)
         {
             Attack();

@@ -10,6 +10,7 @@ public class Enemy : ScriptableObject
     public int health;
     public int damage;
     public float speed;
+    public int gemExp;
     public Animator anim;
 
 }
