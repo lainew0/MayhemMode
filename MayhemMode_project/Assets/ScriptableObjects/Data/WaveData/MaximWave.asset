@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 699817dd8613c15468e738601355b759, type: 3}
+  m_Name: MaximWave
+  m_EditorClassIdentifier: 
+  waveName: MaximWave
+  EnemiesInWave:
+  - {fileID: 7929048044435577156, guid: e32986c0fcdfd9d4d81857b25824661f, type: 3}
+  - {fileID: 8794308195406327033, guid: 4b0f02fbd522020449520975b64d00ec, type: 3}
+  WaveDuration: 5
+  LimitedNumberToSpawn: 0
+  CooldownSpawn: 0
